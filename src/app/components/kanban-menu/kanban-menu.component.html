@@ -1,5 +1,5 @@
 <section class="flex flex-column h-screen p-3 relative">
-  @for(option of menuOptions; track option) {
+  @for((option of menuOptions$ | async); track option) {
   <app-kanban-item
     [item]="option"
     (itemSelected$)="optionSelected($event)"

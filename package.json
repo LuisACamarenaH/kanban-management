@@ -18,6 +18,8 @@
     "@angular/platform-browser": "^17.0.0",
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
+    "@ngrx/store": "^17.0.1",
+    "@ngrx/store-devtools": "^17.0.1",
     "install": "^0.13.0",
     "npm": "^10.3.0",
     "primeflex": "^3.3.1",

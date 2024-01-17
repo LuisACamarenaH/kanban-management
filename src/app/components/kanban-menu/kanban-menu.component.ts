@@ -1,22 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { IMenuOptions } from '../../interfaces/menu.interface';
-import { Observable, of } from 'rxjs';
-import { menuOptions } from '../../constants/constants.constant';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { dataState } from '../../store-data/selectors/menu-selector';
+import {
+  initMenu,
+  menuOptionSelected,
+} from '../../store-data/actions/menu.actions';
 
 @Component({
   selector: 'app-kanban-menu',
   templateUrl: './kanban-menu.component.html',
 })
 export class KanbanMenuComponent implements OnInit {
-  menuOptions: IMenuOptions[] = menuOptions;
+  menuOptions$: Observable<IMenuOptions[]> = this._store.select(dataState);
 
-  constructor() {}
+  constructor(private readonly _store: Store) {}
 
   ngOnInit(): void {
-    this.menuOptions = menuOptions;
+    this._store.dispatch(initMenu());
   }
 
   optionSelected(menu: IMenuOptions): void {
-    console.log({ menu });
+    this._store.dispatch(menuOptionSelected({ menu }));
   }
 }

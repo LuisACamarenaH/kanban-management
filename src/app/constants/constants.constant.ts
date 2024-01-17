@@ -1,4 +1,4 @@
-import { IMenuList, IMenuOptions } from '../interfaces/menu.interface';
+import { IMenuOptions } from '../interfaces/menu.interface';
 
 export const menuOptions: IMenuOptions[] = [
   {
@@ -20,3 +20,7 @@ export const menuOptions: IMenuOptions[] = [
     icon: 'pi-bars',
   },
 ];
+
+export enum keysStore {
+  kanbanStore = 'kanbanStore',
+}
