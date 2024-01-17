@@ -119,4 +119,10 @@ export const initialListTask = {
 export enum keysStore {
   menuStore = 'menuStore',
   boardStore = 'boardStore',
+  themeStore = 'themeStore',
+}
+
+export enum themes {
+  dark = 'dark.css',
+  white = 'white.css',
 }

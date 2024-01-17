@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KanbanThemeComponent } from './kanban-theme.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
-import { ThemeService } from '../../services/theme.service';
 import { FormsModule } from '@angular/forms';
+import { ThemeService } from '../../services/theme/theme.service';
 
 @NgModule({
   declarations: [KanbanThemeComponent],

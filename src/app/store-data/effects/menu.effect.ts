@@ -25,12 +25,12 @@ export class MenuEffects {
   MenuOptionSelected$ = createEffect(() =>
     this._actions$.pipe(
       ofType(menuOptionSelected),
-      concatMap((action) => {
-        console.log({ action });
-
+      concatMap((menuOptions) => {
         return this._menuService
-          .saveMenuOptionSelected(action)
-          .pipe(map((saveTodo) => saveMenuOptionsSelected(saveTodo)));
+          .saveMenuOptionSelected(menuOptions)
+          .pipe(
+            map((saveMenuOption) => saveMenuOptionsSelected(saveMenuOption))
+          );
       })
     )
   );
