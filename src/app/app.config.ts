@@ -8,6 +8,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { initBoardReducer } from './store-data/reducers/board.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { keysStore } from './constants/constants.constant';
+import { MenuEffects } from './store-data/effects/menu.effect';
 const reducers = {
   [keysStore.boardStore]: initBoardReducer,
   [keysStore.menuStore]: initReducer,
@@ -23,6 +24,6 @@ export const appConfig: ApplicationConfig = {
       },
     }),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideEffects(),
+    provideEffects([MenuEffects]),
   ],
 };
