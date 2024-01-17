@@ -1,13 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IMenuOptions } from '../../interfaces/menu.interface';
 
 @Component({
   selector: 'app-kanban-item',
   templateUrl: './kanban-item.component.html',
 })
 export class KanbanItemComponent {
-  @Input() selection = false;
+  @Input() item: IMenuOptions;
 
-  @Input() text: string;
-
-  @Input() icon = 'pi-bars';
+  @Output() itemSelected$ = new EventEmitter<IMenuOptions>();
 }

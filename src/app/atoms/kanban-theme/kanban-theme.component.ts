@@ -6,6 +6,8 @@ import { ThemeService } from '../../services/theme.service';
   templateUrl: './kanban-theme.component.html',
 })
 export class KanbanThemeComponent {
+  themeSelected = true;
+
   constructor(private readonly _themeService: ThemeService) {}
 
   changeTheme(theme: boolean): void {

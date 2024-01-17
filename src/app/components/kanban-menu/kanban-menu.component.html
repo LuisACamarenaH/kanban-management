@@ -1,0 +1,12 @@
+<section class="flex flex-column h-screen p-3 relative">
+  @for(option of menuOptions; track option) {
+  <app-kanban-item
+    [item]="option"
+    (itemSelected$)="optionSelected($event)"
+  ></app-kanban-item>
+  }
+  <section class="fixed bottom-0 pb-3">
+    <app-kanban-theme></app-kanban-theme>
+    <p class="mt-3"><i class="pi pi-eye-slash mr-2"></i>Hide menu bar</p>
+  </section>
+</section>
