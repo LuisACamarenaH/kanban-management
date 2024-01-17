@@ -1,0 +1,11 @@
+button {
+  width: 100%;
+}
+
+.p-button {
+  justify-content: center;
+
+  .p-button-label {
+    flex: none;
+  }
+}
