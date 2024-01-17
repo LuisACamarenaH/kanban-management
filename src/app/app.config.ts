@@ -11,6 +11,7 @@ import { keysStore } from './constants/constants.constant';
 import { MenuEffects } from './store-data/effects/menu.effect';
 import { initThemeReducer } from './store-data/reducers/theme.reducer';
 import { ThemeEffects } from './store-data/effects/theme.effect';
+import { BoardEffects } from './store-data/effects/board.effect';
 const reducers = {
   [keysStore.boardStore]: initBoardReducer,
   [keysStore.menuStore]: initReducer,
@@ -27,6 +28,6 @@ export const appConfig: ApplicationConfig = {
       },
     }),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideEffects([MenuEffects, ThemeEffects]),
+    provideEffects([MenuEffects, ThemeEffects, BoardEffects]),
   ],
 };
