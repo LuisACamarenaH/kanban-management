@@ -1,16 +1,19 @@
-<div class="flex flex-row">
-  @for(list of listsTasks; track list) {
+<div class="flex flex-row" cdkDropListGroup>
+  @for(list of listTask.list; track list; let index = $index) {
   <div class="flex flex-column col-4">
     <ng-container
       [ngTemplateOutlet]="listTasks"
-      [ngTemplateOutletContext]="{ list: list }"
+      [ngTemplateOutletContext]="{
+        list: list,
+        index: index
+      }"
     >
     </ng-container>
   </div>
   }
 </div>
 
-<ng-template #listTasks let-list="list">
+<ng-template #listTasks let-list="list" let-index="index">
   <div class="flex">
     <span
       [ngStyle]="{ background: list.color }"
@@ -18,12 +21,24 @@
     ></span>
     {{ list.title }} ({{ list.tasks.length }})
   </div>
-  <div *ngFor="let task of list.tasks">
+  <div
+    id="list-{{ index }}"
+    cdkDropList
+    (cdkDropListDropped)="drop($event)"
+    [cdkDropListData]="list"
+    [cdkDropListConnectedTo]="listIds"
+    class="h-full"
+  >
+    @for(task of list.tasks; track task) {
+
     <div class="mt-3">
       <app-kanban-card
+        cdkDrag
+        cdkDragPreviewContainer="parent"
         [title]="task.title"
         [description]="task.description"
       ></app-kanban-card>
     </div>
+    }
   </div>
 </ng-template>

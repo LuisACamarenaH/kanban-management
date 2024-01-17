@@ -1,100 +1,63 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { dataBoardState } from '../../store-data/selectors/board.selector';
+import {
+  changeTaskOfBoard,
+  initBoard,
+} from '../../store-data/actions/board.actions';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { BoardService } from '../../services/board/board.service';
+import { IListArray, IListTasks } from '../../interfaces/board.interface';
 
 @Component({
   selector: 'app-kanban-board',
   templateUrl: './kanban-board.component.html',
 })
-export class KanbanBoardComponent {
-  listsTasks = [
-    {
-      title: 'TODO',
-      color: '#F4D03F',
-      tasks: [
-        {
-          title: 'title 1',
-          description: 'completed 1 to 212 tasks',
-        },
-        {
-          title: 'title 2',
-          description: 'completed 1 to 3 tasks',
-        },
-        {
-          title: 'title 3',
-          description: 'completed 1 to 34 tasks',
-        },
-        {
-          title: 'title 4',
-          description: 'completed 1 to 6 tasks',
-        },
-      ],
-    },
-    {
-      title: 'DOING',
-      color: '#58D68D',
-      tasks: [
-        {
-          title: 'title 1',
-          description: 'completed 1 to 212 tasks',
-        },
-        {
-          title: 'title 2',
-          description: 'completed 1 to 3 tasks',
-        },
-        {
-          title: 'title 3',
-          description: 'completed 1 to 34 tasks',
-        },
-        {
-          title: 'title 4',
-          description: 'completed 1 to 6 tasks',
-        },
-        {
-          title: 'title 3',
-          description: 'completed 1 to 34 tasks',
-        },
-        {
-          title: 'title 4',
-          description: 'completed 1 to 6 tasks',
-        },
-      ],
-    },
-    {
-      title: 'DONE',
-      color: '#5DADE2',
-      tasks: [
-        {
-          title: 'title 1',
-          description: 'completed 1 to 212 tasks',
-        },
-        {
-          title: 'title 2',
-          description: 'completed 1 to 3 tasks',
-        },
-        {
-          title: 'title 3',
-          description: 'completed 1 to 34 tasks',
-        },
-        {
-          title: 'title 4',
-          description: 'completed 1 to 6 tasks',
-        },
-        {
-          title: 'title 3',
-          description: 'completed 1 to 34 tasks',
-        },
-        {
-          title: 'title 4',
-          description: 'completed 1 to 6 tasks',
-        },
-        {
-          title: 'title 3',
-          description: 'completed 1 to 34 tasks',
-        },
-        {
-          title: 'title 4',
-          description: 'completed 1 to 6 tasks',
-        },
-      ],
-    },
-  ];
+export class KanbanBoardComponent implements OnInit {
+  listTask: IListArray;
+
+  listIds: string[] = [];
+
+  private IListArray$: Observable<IListArray> =
+    this._store.select(dataBoardState);
+
+  constructor(
+    private readonly _store: Store,
+    private readonly _boardService: BoardService
+  ) {}
+
+  ngOnInit(): void {
+    this._store.dispatch(initBoard());
+
+    this.IListArray$.subscribe((listBoardResponse) => {
+      this.listTask = listBoardResponse;
+      this.listIds = this.listTask.list?.map(
+        (_list, idx: number) => `list-${idx}`
+      );
+    });
+  }
+
+  drop(event: CdkDragDrop<IListTasks>): void {
+    const { previousIndex, currentIndex } = event;
+    const { container } = event;
+    const { previousContainer } = event;
+
+    if (event.previousContainer === event.container) {
+      this._boardService.moveTaskInList(
+        container.data,
+        previousIndex,
+        currentIndex
+      );
+    } else {
+      this._boardService.moveTaskOtherList(
+        previousContainer.data,
+        container.data,
+        previousIndex,
+        currentIndex
+      );
+    }
+
+    this._store.dispatch(changeTaskOfBoard({ list: { ...this.listTask } }));
+  }
 }
