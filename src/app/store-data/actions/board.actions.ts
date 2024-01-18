@@ -22,3 +22,8 @@ export const addNewTask = createAction(
   '[Add new task] Add new task',
   props<{ task: Itask }>()
 );
+
+export const updatedTask = createAction(
+  '[Update task] Update task',
+  props<{ task: Itask }>()
+);

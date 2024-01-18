@@ -36,10 +36,10 @@ export class CreateTaskModalComponent {
     private readonly _fbBuilder: FormBuilder,
     private readonly _ref: DynamicDialogRef
   ) {
-    this.createForm();
+    this._createForm();
   }
 
-  createForm() {
+  private _createForm() {
     this.formModal = this._fbBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -57,20 +57,26 @@ export class CreateTaskModalComponent {
     });
   }
 
-  addTask() {
-    const hola = this._fbBuilder.group({
+  private _createId(): number {
+    return Math.floor(Math.random() * (200 - 1 + 1) + 1);
+  }
+
+  addTask(): void {
+    const task = this._fbBuilder.group({
       task: [''],
     });
-    this.tasks.push(hola);
+    this.tasks.push(task);
   }
 
   removeSubTask(index: number): void {
     this.tasks.removeAt(index);
   }
 
-  createTask() {
-    console.log(this.formModal.value);
-    this._ref.close(this.formModal.value);
+  createTask(): void {
+    this._ref.close({
+      addNewTask: { ...this.formModal.value, id: this._createId() },
+      added: true,
+    });
   }
 
   get tasks(): FormArray {

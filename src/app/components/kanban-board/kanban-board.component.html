@@ -1,6 +1,7 @@
 <div class="flex flex-row" cdkDropListGroup>
   @for(list of listTask.list; track list; let index = $index) {
   <div class="flex flex-column col-4">
+    {{ index }}
     <ng-container
       [ngTemplateOutlet]="listTasks"
       [ngTemplateOutletContext]="{
@@ -36,7 +37,8 @@
         cdkDrag
         cdkDragPreviewContainer="parent"
         [title]="task.title"
-        [description]="task.description"
+        [description]="taskDoneText(task.subTasks)"
+        (click)="taskSelected(task)"
       ></app-kanban-card>
     </div>
     }

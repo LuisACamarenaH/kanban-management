@@ -8,7 +8,14 @@ import {
 } from '../../store-data/actions/board.actions';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { BoardService } from '../../services/board/board.service';
-import { IListArray, IListTasks } from '../../interfaces/board.interface';
+import {
+  IListArray,
+  IListTasks,
+  Itask,
+} from '../../interfaces/board.interface';
+import { ModalService } from '../../services/modal/modal.service';
+import { ShowTaskModalComponent } from '../show-task-modal/show-task-modal.component';
+import { TaskDonePipe } from '../../pipes/task-done.pipe';
 
 @Component({
   selector: 'app-kanban-board',
@@ -24,7 +31,9 @@ export class KanbanBoardComponent implements OnInit {
 
   constructor(
     private readonly _store: Store,
-    private readonly _boardService: BoardService
+    private readonly _boardService: BoardService,
+    private readonly _modalService: ModalService,
+    private readonly _taskDonePipe: TaskDonePipe
   ) {}
 
   ngOnInit(): void {
@@ -59,5 +68,13 @@ export class KanbanBoardComponent implements OnInit {
     }
 
     this._store.dispatch(changeTaskOfBoard({ list: { ...this.listTask } }));
+  }
+
+  taskSelected(task: Itask): void {
+    this._modalService.openModal(ShowTaskModalComponent, task);
+  }
+
+  taskDoneText(tasks: [{ task: string; done: boolean }]): string {
+    return this._taskDonePipe.transform(tasks);
   }
 }

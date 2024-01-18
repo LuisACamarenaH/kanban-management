@@ -6,7 +6,10 @@ import {
   Itask,
 } from '../../interfaces/board.interface';
 import { Observable, of, switchMap } from 'rxjs';
-import { initialListTask } from '../../constants/constants.constant';
+import {
+  initialListTask,
+  listStatus,
+} from '../../constants/constants.constant';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +35,10 @@ export class BoardService {
       previousIndex,
       currentIndex
     );
+
+    list.tasks[currentIndex].status = listStatus.find(
+      (status) => status.code === list.id
+    ) as { code: string; name: string };
   }
 
   loadListTask(): Observable<{ list: IListArray }> {
@@ -54,6 +61,49 @@ export class BoardService {
           return element;
         });
         return this.saveListTask({ list: listTask });
+      })
+    );
+  }
+
+  updatedTask(updatedTask: Itask): Observable<{ list: IListArray }> {
+    return this.loadListTask().pipe(
+      switchMap((listTask: any) => {
+        const listTaskUpdated = listTask.list.reduce(
+          (accumulator: any[], currentvalue: any) => {
+            const filterTask = currentvalue.tasks.find(
+              (task: Itask) =>
+                task.id === updatedTask.id &&
+                currentvalue.id === updatedTask.status.code
+            );
+            if (filterTask) {
+              currentvalue.tasks = currentvalue.tasks.map((task: Itask) => {
+                if (task.id === updatedTask.id) {
+                  task = {
+                    ...updatedTask,
+                  };
+                }
+                return task;
+              });
+            } else {
+              const taskIndex = currentvalue.tasks.findIndex(
+                (task: Itask) => task.id === updatedTask.id
+              );
+              if (taskIndex > -1) {
+                currentvalue.tasks.splice(taskIndex, 1);
+              }
+
+              if (currentvalue.id === updatedTask.status.code) {
+                currentvalue.tasks.push(updatedTask);
+              }
+            }
+
+            accumulator.push(currentvalue);
+            return accumulator;
+          },
+          []
+        );
+
+        return this.saveListTask({ list: { list: listTaskUpdated } });
       })
     );
   }

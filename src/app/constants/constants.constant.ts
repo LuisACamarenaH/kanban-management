@@ -35,6 +35,7 @@ export const initialListTask = {
       id: 'TD',
       tasks: [
         {
+          id: 1,
           title: 'title 1',
           description:
             'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente officia accusamus qui voluptate officiis. Sequi magni recusandae harum laborum nesciunt ex distinctio dolores iste, qui iure voluptatem sit, quasi inventore?',
@@ -45,7 +46,7 @@ export const initialListTask = {
           subTasks: [
             {
               task: 'First task',
-              done: false,
+              done: true,
             },
             {
               task: 'Second task',
@@ -54,6 +55,7 @@ export const initialListTask = {
           ],
         },
         {
+          id: 2,
           title: 'title 2',
           description:
             'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente officia accusamus qui voluptate officiis. Sequi magni recusandae harum laborum nesciunt ex distinctio dolores iste, qui iure voluptatem sit, quasi inventore?',
@@ -80,6 +82,7 @@ export const initialListTask = {
       id: 'DNG',
       tasks: [
         {
+          id: 3,
           title: 'title 1',
           description: 'completed 1 to 212 tasks',
           status: {
@@ -98,6 +101,7 @@ export const initialListTask = {
           ],
         },
         {
+          id: 4,
           title: 'title 2',
           description: 'completed 1 to 3 tasks',
           status: {
@@ -116,6 +120,7 @@ export const initialListTask = {
           ],
         },
         {
+          id: 5,
           title: 'title 3',
           description: 'completed 1 to 34 tasks',
           status: {
@@ -134,6 +139,7 @@ export const initialListTask = {
           ],
         },
         {
+          id: 6,
           title: 'title 4',
           description: 'completed 1 to 6 tasks',
           status: {
@@ -152,6 +158,7 @@ export const initialListTask = {
           ],
         },
         {
+          id: 7,
           title: 'title 5',
           description: 'completed 1 to 34 tasks',
           status: {
@@ -170,6 +177,7 @@ export const initialListTask = {
           ],
         },
         {
+          id: 8,
           title: 'title 6',
           description: 'completed 1 to 6 tasks',
           status: {
@@ -195,6 +203,7 @@ export const initialListTask = {
       id: 'DN',
       tasks: [
         {
+          id: 9,
           title: 'title 1',
           description: 'completed 1 to 212 tasks',
           status: {
@@ -213,6 +222,7 @@ export const initialListTask = {
           ],
         },
         {
+          id: 10,
           title: 'title 2',
           description: 'completed 1 to 3 tasks',
           status: {
@@ -231,6 +241,7 @@ export const initialListTask = {
           ],
         },
         {
+          id: 11,
           title: 'title 3',
           description: 'completed 1 to 34 tasks',
           status: {
@@ -249,6 +260,7 @@ export const initialListTask = {
           ],
         },
         {
+          id: 12,
           title: 'title 4',
           description: 'completed 1 to 6 tasks',
           status: {
@@ -267,6 +279,7 @@ export const initialListTask = {
           ],
         },
         {
+          id: 13,
           title: 'title 5',
           description: 'completed 1 to 34 tasks',
           status: {
@@ -285,6 +298,7 @@ export const initialListTask = {
           ],
         },
         {
+          id: 14,
           title: 'title 6',
           description: 'completed 1 to 6 tasks',
           status: {
@@ -303,6 +317,7 @@ export const initialListTask = {
           ],
         },
         {
+          id: 15,
           title: 'title 7',
           description: 'completed 1 to 34 tasks',
           status: {
@@ -321,6 +336,7 @@ export const initialListTask = {
           ],
         },
         {
+          id: 16,
           title: 'title 8',
           description: 'completed 1 to 6 tasks',
           status: {

@@ -1,0 +1,31 @@
+<div>
+  <h3>{{ data?.title }}</h3>
+  <p for="">{{ data?.description }}</p>
+  <p for="">Subtasks {{ data.subTasks | taskDone }}</p>
+
+  @for(task of data.subTasks; track task) {
+  <div class="flex">
+    <p-checkbox
+      appMarkCompleted
+      [(ngModel)]="task.done"
+      [binary]="true"
+      inputId="binary"
+    ></p-checkbox>
+    <p class="ml-3" [class.line-through]="task.done">
+      {{ task.task }}
+    </p>
+  </div>
+  }
+  <div class="my-3">
+    <app-kanban-dropdown
+      [text]="'Status'"
+      [list]="listStatus"
+      [form]="showTask"
+    ></app-kanban-dropdown>
+  </div>
+  <app-kanban-button
+    [text]="'Update task'"
+    [backgroundColor]="'help'"
+    (click)="updateTask()"
+  ></app-kanban-button>
+</div>

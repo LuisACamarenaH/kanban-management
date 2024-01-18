@@ -43,6 +43,7 @@
 
   <div class="my-3">
     <app-kanban-dropdown
+      [placeholder]="'Select to status'"
       [text]="'Status'"
       [list]="listStatus"
       [form]="formModal?.controls['status']"

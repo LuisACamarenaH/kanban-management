@@ -7,6 +7,7 @@ import {
   initBoard,
   loadBoard,
   saveTaskOfBoard,
+  updatedTask,
 } from '../actions/board.actions';
 import { BoardService } from '../../services/board/board.service';
 import { Itask } from '../../interfaces/board.interface';
@@ -44,6 +45,19 @@ export class BoardEffects {
         return this._boardService.addNewTask(addNewTask).pipe(
           map((addNewTask) => {
             return saveTaskOfBoard(addNewTask);
+          })
+        );
+      })
+    )
+  );
+
+  updatedTask$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(updatedTask),
+      exhaustMap(({ task }) => {
+        return this._boardService.updatedTask(task).pipe(
+          map((updatedTask) => {
+            return saveTaskOfBoard(updatedTask);
           })
         );
       })

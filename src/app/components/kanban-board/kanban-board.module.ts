@@ -9,6 +9,7 @@ import {
   DragDropModule,
 } from '@angular/cdk/drag-drop';
 import { BoardService } from '../../services/board/board.service';
+import { TaskDonePipe } from '../../pipes/task-done.pipe';
 
 @NgModule({
   declarations: [KanbanBoardComponent],
@@ -21,6 +22,6 @@ import { BoardService } from '../../services/board/board.service';
     CdkDrag,
   ],
   exports: [KanbanBoardComponent],
-  providers: [BoardService],
+  providers: [BoardService, TaskDonePipe],
 })
 export class KanbanBoardModule {}
