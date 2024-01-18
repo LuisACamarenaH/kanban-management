@@ -1,0 +1,10 @@
+<div class="flex flex-column">
+  <label class="font-bold text-sm mb-2" for="text">{{ text }}</label>
+  <p-dropdown
+    class="w-full"
+    [options]="list"
+    optionLabel="name"
+    [formControl]="form"
+    placeholder="{{ placeholder }}"
+  ></p-dropdown>
+</div>

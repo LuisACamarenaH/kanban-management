@@ -1,3 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "assets/custom-theme/p-button.scss";
+@import "assets/custom-theme/p-dropdown.scss";
