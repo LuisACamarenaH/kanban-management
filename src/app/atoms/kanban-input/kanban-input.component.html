@@ -1,4 +1,8 @@
 <div class="flex flex-column">
   <label class="font-bold text-sm mb-2" for="text">{{ text }}</label>
+  @switch(inputType) { @case ('input') {
   <input [formControl]="form" pInputText placeholder="{{ placeholder }}" />
+  } @case('textarea') {
+  <textarea rows="5" cols="30" pInputTextarea [formControl]="form"></textarea>
+  } }
 </div>

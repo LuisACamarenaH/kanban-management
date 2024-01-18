@@ -10,5 +10,7 @@ export class KanbanInputComponent {
 
   @Input() placeholder: string;
 
+  @Input() inputType: string;
+
   @Input() form: FormControl;
 }
