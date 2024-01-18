@@ -1,4 +1,8 @@
-import { ApplicationConfig, isDevMode } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  isDevMode,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -12,6 +16,8 @@ import { MenuEffects } from './store-data/effects/menu.effect';
 import { initThemeReducer } from './store-data/reducers/theme.reducer';
 import { ThemeEffects } from './store-data/effects/theme.effect';
 import { BoardEffects } from './store-data/effects/board.effect';
+import { DialogService } from 'primeng/dynamicdialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 const reducers = {
   [keysStore.boardStore]: initBoardReducer,
   [keysStore.menuStore]: initReducer,
@@ -29,5 +35,7 @@ export const appConfig: ApplicationConfig = {
     }),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideEffects([MenuEffects, ThemeEffects, BoardEffects]),
+    DialogService,
+    importProvidersFrom([BrowserAnimationsModule]),
   ],
 };

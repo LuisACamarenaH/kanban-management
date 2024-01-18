@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatMap, exhaustMap, map } from 'rxjs';
 import {
+  addNewTask,
   changeTaskOfBoard,
   initBoard,
   loadBoard,
   saveTaskOfBoard,
 } from '../actions/board.actions';
 import { BoardService } from '../../services/board/board.service';
+import { Itask } from '../../interfaces/board.interface';
 
 @Injectable()
 export class BoardEffects {
@@ -25,10 +27,23 @@ export class BoardEffects {
   saveListsTasks$ = createEffect(() =>
     this._actions$.pipe(
       ofType(changeTaskOfBoard),
-      concatMap((listsTasks) => {
+      exhaustMap((listsTasks) => {
         return this._boardService.saveListTask(listsTasks).pipe(
           map((listsTasks) => {
             return saveTaskOfBoard(listsTasks);
+          })
+        );
+      })
+    )
+  );
+
+  addNewTask$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(addNewTask),
+      exhaustMap((addNewTask: any) => {
+        return this._boardService.addNewTask(addNewTask).pipe(
+          map((addNewTask) => {
+            return saveTaskOfBoard(addNewTask);
           })
         );
       })

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IListArray } from '../../interfaces/board.interface';
+import { IListArray, Itask } from '../../interfaces/board.interface';
 
 export const initBoard = createAction('[Board init] Init');
 
@@ -16,4 +16,9 @@ export const changeTaskOfBoard = createAction(
 export const saveTaskOfBoard = createAction(
   '[Save task of board] Save task of board',
   props<{ list: IListArray }>()
+);
+
+export const addNewTask = createAction(
+  '[Add new task] Add new task',
+  props<{ task: Itask }>()
 );

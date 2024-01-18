@@ -1,0 +1,59 @@
+<form [formGroup]="formModal">
+  <app-kanban-input
+    [text]="'Titlte'"
+    [placeholder]="'e.g Take coffee break'"
+    [inputType]="'input'"
+    [form]="formModal?.controls['title']"
+  ></app-kanban-input>
+
+  <div class="my-3">
+    <app-kanban-input
+      [text]="'Description'"
+      [placeholder]="'e.g Take coffee break'"
+      [inputType]="'textarea'"
+      [form]="formModal?.controls['description']"
+    ></app-kanban-input>
+  </div>
+
+  <p><label class="font-bold text-sm my-3" for="text">Subtasks</label></p>
+
+  <div formArrayName="subTasks">
+    @for(task of tasks.controls; track task; let index = $index) {
+    <div class="flex flex-row align-items-center" [formGroupName]="index">
+      <app-kanban-input
+        class="w-full"
+        [placeholder]="'e.g Take coffee break'"
+        [inputType]="'input'"
+        [form]="tasks.controls[index].get('task')"
+      ></app-kanban-input>
+      <i (click)="removeSubTask(index)" class="pi pi-times ml-3"></i>
+    </div>
+    }
+  </div>
+
+  <div class="my-3">
+    <app-kanban-button
+      [text]="'Add new task'"
+      [backgroundColor]="'help'"
+      [outlined]="true"
+      [icon]="'pi-plus'"
+      (click)="addTask()"
+    ></app-kanban-button>
+  </div>
+
+  <div class="my-3">
+    <app-kanban-dropdown
+      [text]="'Status'"
+      [list]="listStatus"
+      [form]="formModal?.controls['status']"
+    ></app-kanban-dropdown>
+  </div>
+
+  <div class="mt-3">
+    <app-kanban-button
+      [text]="'Create task'"
+      [backgroundColor]="'help'"
+      (click)="createTask()"
+    ></app-kanban-button>
+  </div>
+</form>

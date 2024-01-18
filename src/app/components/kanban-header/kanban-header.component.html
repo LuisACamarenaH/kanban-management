@@ -4,6 +4,7 @@
   </div>
   <div class="col-3">
     <app-kanban-button
+      (click)="openModal()"
       [text]="'Add new task'"
       [icon]="'pi-plus'"
       [iconPosition]="'left'"
