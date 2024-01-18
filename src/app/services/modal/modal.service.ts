@@ -22,7 +22,6 @@ export class ModalService {
       data,
       header: 'Add new task',
       width: '450px',
-      height: '750px',
       maximizable: true,
     });
 
