@@ -25,7 +25,7 @@ export class ThemeEffects {
   changeThemeSelected$ = createEffect(() =>
     this._actions$.pipe(
       ofType(themeSelected),
-      concatMap((themeName: any) => {
+      exhaustMap((themeName) => {
         return this._themeService.saveThemeSelected(themeName).pipe(
           map((themeName) => {
             this._themeService.loadTheme().subscribe();

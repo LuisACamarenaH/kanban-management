@@ -25,7 +25,7 @@ export class MenuEffects {
   MenuOptionSelected$ = createEffect(() =>
     this._actions$.pipe(
       ofType(menuOptionSelected),
-      concatMap((menuOptions) => {
+      exhaustMap((menuOptions) => {
         return this._menuService
           .saveMenuOptionSelected(menuOptions)
           .pipe(
